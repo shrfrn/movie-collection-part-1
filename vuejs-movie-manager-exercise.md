@@ -13,12 +13,14 @@ In the provided movie service, each movie is represented as a JavaScript object 
   id: String,                // Unique identifier
   title: String,             // Movie title
   director: String,          // Director's name
-  posterUrl: String,         // URL to the movie poster image
+
+  posterUrl: String,         // You can use a defualt posterUrl for now.
   runningTime: Number,       // Running time in minutes
   releaseYear: Number,       // Year of release
   actors: String[],          // Array of actor names
   genre: String              // Genre of the movie
 }
+
 
 export const movieService = {
   query,
@@ -92,6 +94,10 @@ In the root component of our app, render the header and footer along with a slot
 Add a **Add a Movie** button to the `<MovieIndex>` Component which will navigate to the **Movie Edit Route**. Refactor the route to support adding as well as editing a movie.
 
 > ℹ️ You will need to make the `/movie/edit/:id?` route param optional
+
+Add a **Get Poster** button to the form which will use the `movieService.getMoviePoster()` to lookup a url for the movie poster by the movie's name.
+
+> ℹ️ You will need to get an API Key at [OMBD](https://www.omdbapi.com/apikey.aspx) and use it in `movieService.getMoviePoster()` 
 
 ### Adding a `<UserMsg />` Component
 

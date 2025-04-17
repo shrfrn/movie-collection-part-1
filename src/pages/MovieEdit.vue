@@ -5,6 +5,7 @@
         <input v-model="movie.genre" type="text">
         <input v-model="movie.runningTime" type="number">
         <button>Save</button>
+        <button type="button" @click="getPoster">Get Poster</button>
         <RouterLink to="/movie"><button type="button">Cancel</button></RouterLink>
     </form>
 </template>
@@ -22,6 +23,11 @@ export default {
         async onSave() {
             await movieService.save(this.movie)
             this.$router.push('/movie')
+        },
+        async getPoster() {
+            const posterUrl = await movieService.getMoviePoster(this.movie.title)
+            console.log(posterUrl)
+            this.movie.posterUrl = posterUrl
         }
     },  
     async created() {

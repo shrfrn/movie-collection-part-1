@@ -13,6 +13,7 @@ export const movieService = {
 	remove,
 	save,
 	getEmptyMovie,
+    getMoviePoster,
 }
 
 async function query(filterBy = {}) {
@@ -48,6 +49,19 @@ function getEmptyMovie() {
 		actors: [], // Array of actor names
 		genre: '', // Genre of the movie
 	}
+}
+
+async function getMoviePoster(title) {
+	const API_KEY = 'abc123'
+
+	const res = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(title)}&apikey=${API_KEY}`)
+    const data = await res.json()
+    
+    if (data.Response === 'True') {
+        return data.Poster // Use this in your UI
+    } else {
+        return '../../default.png'
+    }
 }
 
 function _createMovies() {
