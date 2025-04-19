@@ -26,6 +26,10 @@ export default {
 </script>
 
 <style lang="scss">
+.movie-preview {
+    grid-column: 1 / 3;
+}
+
 img {
     display: block;
     width: 100%;
