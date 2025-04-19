@@ -21,7 +21,15 @@ async function query(filterBy = {}) {
 
 	if (filterBy.txt) {
 		const regex = new RegExp(filterBy.txt, 'i')
-		movies = movies.filter(movie => regex.test(movie.title))
+		movies = 
+            movies.filter(movie => 
+                regex.test(movie.title) || 
+                regex.test(movie.director) || 
+                movie.actors.some(actor => regex.test(actor)))
+	}
+
+	if (filterBy.maxRunningTime) {
+		movies = movies.filter(movie => movie.runningTime <= filterBy.maxRunningTime)
 	}
 	return movies
 }
