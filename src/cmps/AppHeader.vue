@@ -1,6 +1,6 @@
 <template>
 	<header>
-		<h1>Cars</h1>
+		<h1>🎬 Movie Collection</h1>
 		<nav>
 			<RouterLink to="/">Home</RouterLink>
 			<RouterLink to="/movie">Movies</RouterLink>

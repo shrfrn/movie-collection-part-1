@@ -1,10 +1,25 @@
 <template>
     <form v-if="movie" @submit.prevent="onSave" class="movie-edit">
-        <input v-model="movie.title" type="text" >
-        <input v-model="movie.director" type="text" >
-        <input v-model="movie.genre" type="text" >
-        <input v-model="movie.runningTime" type="number" >
-        <input v-model="movie.posterUrl" type="text" >
+        <div class="field">
+            <label>title</label>
+            <input v-model="movie.title" type="text" placeholder="title">
+        </div>
+        <div class="field">
+            <label>director</label>
+            <input v-model="movie.director" type="text" placeholder="director">
+        </div>
+        <div class="field">
+            <label>genre</label>
+            <input v-model="movie.genre" type="text" placeholder="genre">
+        </div>
+        <div class="field">
+            <label>running time</label>
+            <input v-model="movie.runningTime" type="number" placeholder="running time">
+        </div>
+        <div class="field">
+            <label>poster url</label>
+            <input v-model="movie.posterUrl" type="text" placeholder="poster url">
+        </div>
         <button type="button" @click="getPoster">Get Poster</button>
 
         <div class="actions">
@@ -51,7 +66,7 @@ export default {
     display: grid;
     justify-items: start;
     justify-content: center;
-    gap: 10px 30px;
+    gap: 20px 30px;
 
     width: max-content;
 
@@ -60,12 +75,27 @@ export default {
     margin-block-start: 2rem;
     margin-inline: auto;
 
-    input {
+    .field {
         position: relative;
 
+        label {
+            position: absolute;
+            top: -.7em;
+            left: 0;
+
+            color: whitesmoke;
+            font-size: .7em;
+        }
     }
 
-    input:nth-child(even) {
+    input {
+        margin-block-start: .5em;
+        &::placeholder {
+            color: lightgray;
+        }
+    }
+
+    .field:nth-child(even) {
         grid-column: 2;
     }
 }

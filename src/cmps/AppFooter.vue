@@ -1,6 +1,6 @@
 <template>
 	<footer>
-        <p>Coffee Rights 2024</p>
+        <p>Coffee Rights 2025</p>
 	</footer>
 </template>
 

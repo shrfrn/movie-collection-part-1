@@ -52,5 +52,6 @@ export default {
 <style lang="scss" scoped>
 header {
     background-color: lightgray;
+    margin-block-start: .5em;
 }
 </style>
