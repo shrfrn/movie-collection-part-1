@@ -9,34 +9,34 @@
 <script>
 import MovieFilter from '@/cmps/MovieFilter.vue'
 import MovieList from '@/cmps/MovieList.vue'
-import { movieService } from '@/services/movie.service'
 import { debounce } from '@/services/util.service'
 import { showErrorMsg, showSuccessMsg } from '@/services/event-bus.service'
 
 export default {
-	data() {
-		return {
-			movies: [],
-		}
-	},
     methods: {
         async removeMovie(movieId) {
-            await movieService.remove(movieId)
-
-            const idx = this.movies.findIndex(movie => movie._id === movieId)
-            this.movies.splice(idx, 1)
+            try {
+                await this.$store.dispatch({ type: 'removeMovie', movieId })
+                showSuccessMsg(`Movie ${movieId} removed`)
+            } catch (err) {
+                showErrorMsg(`Problem loading movies...`)
+            }
         },
         onFilter(filterBy) {
-            this.debouncedLoadMovies(filterBy)
+            this.$store.commit({ type: 'setFilter', filterBy })
+            this.debouncedLoadMovies()
         },
-        async loadMovies(filterBy = {}) {
+        async loadMovies() {
             try {
-                this.movies = await movieService.query(filterBy)
-                showSuccessMsg('Movies loaded')
+                await this.$store.dispatch({ type: 'loadMovies' })
+                showSuccessMsg('Movies loaded OK')
             } catch (err) {
-                showErrorMsg('Error loading movies')
+                showErrorMsg('Error loading movies...')
             }
         }
+    },
+    computed: {
+        movies() { return this.$store.getters.movies }
     },
 	async created() {
         this.debouncedLoadMovies = debounce(this.loadMovies)
