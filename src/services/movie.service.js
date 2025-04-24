@@ -28,8 +28,8 @@ async function query(filterBy = {}) {
                 movie.actors.some(actor => regex.test(actor)))
 	}
 
-	if (filterBy.maxRunningTime) {
-		movies = movies.filter(movie => movie.runningTime <= filterBy.maxRunningTime)
+	if (filterBy.maxRunTime) {
+		movies = movies.filter(movie => movie.runningTime <= filterBy.maxRunTime)
 	}
 	return movies
 }

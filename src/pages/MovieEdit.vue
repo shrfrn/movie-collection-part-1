@@ -21,6 +21,11 @@
             <input v-model="movie.posterUrl" type="text" placeholder="poster url">
         </div>
         <button type="button" @click="getPoster">Get Poster</button>
+        <div class="field">
+            <label>actors</label>
+            <input v-bind:value="movie.actors" type="text" placeholder="poster url">
+        </div>
+        <button type="button" @click="editActors">Edit Actors</button>
 
         <div class="actions">
             <button>Save</button>
@@ -45,8 +50,14 @@ export default {
         },
         async getPoster() {
             const posterUrl = await movieService.getMoviePoster(this.movie.title)
-            console.log(posterUrl)
             this.movie.posterUrl = posterUrl
+        },
+        editActors() {
+            const promptTxt = this.movie.actors.join(', ')
+            const actors = prompt('Actors:', promptTxt)
+            if (!actors) return
+
+            this.movie.actors = actors.split(',').map(actor => actor.trim())
         }
     },  
     async created() {

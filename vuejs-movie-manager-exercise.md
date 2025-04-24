@@ -123,3 +123,67 @@ src/
 ├── App.vue
 └── main.js
 ```
+## Part 2 - Connect a store
+
+Let's connect a store to our app.
+
+### Connect a simple store
+
+Start by connecting a simple store with a just a `counter`, and an `increment()` mutation. Use the example from class or the [Vuex docs](https://vuex.vuejs.org/guide/#the-simplest-store) for reference. Make sure to use `strict: true`.
+
+
+Your project structure should now look like this: 
+```
+src/
+├── cmps/
+│   ├── UserMsg.vue
+│   ├── MovieList.vue
+│   ├── MoviePreview.vue
+│   ├── MovieFilter.vue
+│   └── ...
+├── pages/
+│   ├── MovieIndex.vue
+│   ├── MovieDetail.vue
+│   ├── MovieEdit.vue
+│   └── ...
+├── router/
+│   └── index.js
+├── store/
+│   ├── modules
+│   │   └── movie.js
+│   └── index.js
+├── App.vue
+└── main.js
+```
+
+Add a getter to retrieve the counter and render it on the Home page & footer of your app.
+Add a button to increment it using the `increment()` mutation.
+
+### Add a movie module
+
+Let's move the `movies` array from the `MovieIndex` component to the store. Here is a step by step breakdown of how to do this:
+
+1. Create a `movie` module with a `movies` array, a `setMovies()` mutation a `loadMovies()` action and `movies()` getter.
+1. Remove the `movies` local state from the `MovieIndex` component and define a `movies()` computed property instead, which fetches the movies array from the store (use the `movies()` getter)
+1. Add a `removeMovie()` mutation & action.
+1. You now have a basic store to handle the movies array of your app.
+
+### Move the filter to the store
+
+1. Define a `filterBy` state + a `setFilterBy()` mutation in the `movie` module.
+1. When the user edits the filter, call the mutation to update it in the store.
+
+    > ⚠️ Make sure to save a copy of the fiterBy object in the store to prevent direct editing of store state in the filterBy component
+
+1. The `loadMovies()` action will now use the `filterBy` from the store when quering the service.
+
+### Add Optimistic Mutation behavior 
+
+1. Add a `savedMovies` array + `saveMovies()` and `restoreMovies()` mutations to the movie module.
+1. `saveMovies()` will create a copy of the `movies` array in `savedMovies`.
+1. `restoreMovies()` will copy `savedMovies` back into the `movies` array.
+1. In the `removeMovie()` action: 
+- call `saveMovies()` to capture a backup of the movies array.
+- call the `removeMovie()` mutation to update the movies array.
+- only then, call the `removeMovie()` action to remove the movie from `localStorage`.
+1. If the acion fails, restore the movies in the `catch` block.
