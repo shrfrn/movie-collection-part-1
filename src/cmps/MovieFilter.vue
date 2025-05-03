@@ -1,7 +1,7 @@
 <template>
     <section class="movie-filter">
-        <input @input="onFilterBy" v-model="filterBy.txt" type="text" placeholder="Search">
-        <input @input="onFilterBy" v-model="filterBy.maxRunTime" type="number" placeholder="Max. running time">
+        <input v-model="filterBy.txt" type="text" placeholder="Search">
+        <input v-model="filterBy.maxRunTime" type="number" placeholder="Max. running time">
     </section>
 </template>
 
@@ -15,10 +15,12 @@ export default {
             }
         }
     },
-    methods: {
-        onFilterBy() {
-            console.log(this.filterBy)
-            this.$emit('filter', this.filterBy)
+    watch: {
+        filterBy: {
+            handler(filterBy) {
+                this.$emit('filter', filterBy)
+            },
+            deep: true,
         }
     },
 }
