@@ -21,12 +21,19 @@
             <input v-model="movie.posterUrl" type="text" placeholder="poster url">
         </div>
         <button type="button" @click="getPoster">Get Poster</button>
+        
         <div class="field">
+            <label>actors</label>
+            <input v-model="actors" type="text" placeholder="actors">
+        </div>
+        <!-- <button type="button" @click="editActors">Edit Actors</button> -->
+        <!-- <div class="field">
             <label>actors</label>
             <input v-bind:value="movie.actors" type="text" placeholder="poster url">
         </div>
-        <button type="button" @click="editActors">Edit Actors</button>
+        <button type="button" @click="editActors">Edit Actors</button> -->
 
+        <!-- <input v-model="movie.actors" type="text"> -->
         <div class="actions">
             <button>Save</button>
             <RouterLink to="/movie"><button type="button">Cancel</button></RouterLink>
@@ -41,6 +48,16 @@ export default {
     data() {
         return {
             movie: null,
+        }
+    },
+    computed: {
+        actors: {
+            get() {
+                return this.movie.actors.join(',')
+            },
+            set(actors) {
+                this.movie.actors = actors.split(',').map(actor => actor.trim())
+            }
         }
     },
     methods: {
