@@ -35,7 +35,7 @@ export default {
             try {
                 commit({ type: 'saveMovies' })
                 commit({ type: 'removeMovie', movieId })
-
+                
                 await movieService.remove(movieId)
             } catch (err) {
                 commit({ type: 'restoreMovies' })
