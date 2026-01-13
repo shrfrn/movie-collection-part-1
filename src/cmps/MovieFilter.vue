@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .movie-filter {
     display: flex;
     gap: 10px;

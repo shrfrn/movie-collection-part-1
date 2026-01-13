@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 header {
     background-color: lightgray;
     margin-block-start: .5em;

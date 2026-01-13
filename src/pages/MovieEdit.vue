@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .movie-edit {
     display: grid;
     justify-items: start;
