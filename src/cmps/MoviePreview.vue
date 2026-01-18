@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .movie-preview {
     grid-column: 1 / 3;
 }

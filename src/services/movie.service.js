@@ -35,7 +35,13 @@ async function query(filterBy = {}) {
 }
 
 async function get(movieId) {
-	return storageService.get(KEY, movieId)
+	const movies = await storageService.query(KEY)
+    const idx = movies.findIndex(movie => movie._id === movieId)
+
+    if (idx !== 0) movies[idx].prevId = movies[idx - 1]._id
+    if (idx !== movies.length - 1) movies[idx].nextId = movies[idx + 1]._id
+
+    return movies[idx]
 }
 
 async function remove(movieId) {

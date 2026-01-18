@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .user-msg {
     position: absolute;
     top: 50px;

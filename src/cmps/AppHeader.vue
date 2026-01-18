@@ -13,7 +13,7 @@
 export default {}
 </script>
 
-<style lang="scss">
+<style>
 header {
     display: flex;
     align-items: center;

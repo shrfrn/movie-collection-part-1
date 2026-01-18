@@ -4,7 +4,7 @@
 	</footer>
 </template>
 
-<style lang="scss">
+<style>
 footer {
     display: flex;
     align-items: center;
